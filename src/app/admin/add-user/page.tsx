@@ -42,7 +42,7 @@ const AddUser = () => {
             htmlFor="name"
             className="block  text-lg font-semibold text-fuchsia-800"
           >
-            Name
+           First Name
           </label>
           <input
             type="text"
@@ -59,7 +59,7 @@ const AddUser = () => {
             htmlFor="name"
             className="block  text-lg font-semibold text-fuchsia-800"
           >
-            Name
+            Last Name
           </label>
           <input
             type="text"
