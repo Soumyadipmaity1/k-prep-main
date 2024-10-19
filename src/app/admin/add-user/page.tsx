@@ -47,7 +47,7 @@ const AddUser = () => {
           <input
             type="text"
             id="name"
-            name="name"
+            name="firstName"
             value={formData.firstName}
             onChange={handleInputChange}
             className="mt-1 block w-full border-gray-600 border rounded-md py-2 px-3"
@@ -64,7 +64,7 @@ const AddUser = () => {
           <input
             type="text"
             id="name"
-            name="name"
+            name="lastName"
             value={formData.lastName}
             onChange={handleInputChange}
             className="mt-1 block w-full border-gray-600 border rounded-md py-2 px-3"
