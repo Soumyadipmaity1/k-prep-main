@@ -341,10 +341,8 @@
 // };
 
 // export default AddNoteForm;
-
-
 "use client";
-import { useState, ChangeEvent, FormEvent } from "react";
+import { useState, useEffect, ChangeEvent, FormEvent } from "react";
 import toast from "react-hot-toast";
 import ScaleLoader from "react-spinners/ScaleLoader";
 
@@ -362,13 +360,12 @@ const AddNoteForm: React.FC = () => {
   const [subjectcode, setSubjectCode] = useState<string>("");
   const [semister, setSemester] = useState<string>("");
   const [pdflink, setPdfLink] = useState<string>("");
-  const [schema, setSchema] = useState<string>("");
+  const [scheme, setScheme] = useState<string>("");
 
   const [error, setError] = useState<string>("");
 
   const handleYearChange = (selectedYear: string) => {
     setYear(selectedYear);
-    setSchema(""); // Reset schema selection when year changes
     switch (selectedYear) {
       case "1":
         setSemesterOptions(["1st Sem", "2nd Sem"]);
@@ -394,7 +391,7 @@ const AddNoteForm: React.FC = () => {
       year &&
       semister &&
       pdflink &&
-      (year !== "1" || schema); // Schema is required only if year is 1
+      (year !== "1" || scheme); // For year 1, scheme must be selected
 
     if (!isValid) {
       toast.error("Please fill in all fields.");
@@ -424,7 +421,7 @@ const AddNoteForm: React.FC = () => {
         year,
         semister,
         pdflink,
-        schema: year === "1" ? schema : null, // Add schema only if year is 1
+        ...(year === "1" && { scheme }), // Add scheme only for 1st year
       };
 
       const res = await fetch("/api/note/add-note", {
@@ -436,12 +433,23 @@ const AddNoteForm: React.FC = () => {
       });
 
       const data = await res.json();
+
       if (res.ok) {
+        // Reset form fields after adding a new note
+        setResourceTitle("");
+        setSubjectFullName("");
+        setSubjectShortName("");
+        setCredit("");
+        setSubjectCode("");
+        setYear("");
+        setSemester("");
+        setPdfLink("");
+        setScheme("");
+        setSemesterOptions([]);
         toast.success("Note added successfully");
-        resetForm();
       } else {
         setError(data.message);
-        toast.error(data.message);
+        toast.error(data.message); // Show error from API
       }
     } catch (error) {
       console.error("Error submitting form:", error);
@@ -450,19 +458,6 @@ const AddNoteForm: React.FC = () => {
 
     setIsDisable(false);
     setLoading(false);
-  };
-
-  const resetForm = () => {
-    setResourceTitle("");
-    setSubjectFullName("");
-    setSubjectShortName("");
-    setCredit("");
-    setSubjectCode("");
-    setYear("");
-    setSemester("");
-    setPdfLink("");
-    setSchema("");
-    setSemesterOptions([]);
   };
 
   return (
@@ -605,23 +600,23 @@ const AddNoteForm: React.FC = () => {
           </select>
         </div>
 
-        {/* Schema Selection (Only for 1st Year) */}
+        {/* Scheme Selection (Only for 1st Year) */}
         {year === "1" && (
           <div className="bg-fuchsia-100">
             <label className="block text-fuchsia-900 text-lg font-semibold mb-2">
-              Schema:
+              Scheme:
             </label>
             <select
               disabled={isDisable}
               className="w-full px-4 bg-fuchsia-50 border-fuchsia-500 py-2 border rounded-md focus:outline-none focus:ring-1 focus:ring-fuchsia-500"
-              value={schema}
+              value={scheme}
               onChange={(e: ChangeEvent<HTMLSelectElement>) =>
-                setSchema(e.target.value)
+                setScheme(e.target.value)
               }
             >
-              <option value="">Select Schema</option>
-              <option value="A">Schema A</option>
-              <option value="B">Schema B</option>
+              <option value="">Select Scheme</option>
+              <option value="A">A</option>
+              <option value="B">B</option>
             </select>
           </div>
         )}
@@ -644,17 +639,22 @@ const AddNoteForm: React.FC = () => {
         </div>
       </div>
 
-      {error && <p className="text-red-600">{error}</p>}
+      {/* Error Message */}
+      {error && (
+        <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mt-4">
+          {error}
+        </div>
+      )}
 
-      <button
-        type="submit"
-        className={`mt-6 w-full py-3 rounded-lg font-bold text-white ${
-          isDisable ? "bg-fuchsia-300" : "bg-fuchsia-600 hover:bg-fuchsia-700"
-        }`}
-        disabled={isDisable}
-      >
-        {loading ? <ScaleLoader color="white" height={12} /> : "Add Note"}
-      </button>
+      {/* Submit Button */}
+      <div className="flex justify-center mt-6">
+        <button
+          disabled={isDisable}
+          className="bg-fuchsia-500 text-white py-2 px-6 rounded-lg text-lg font-semibold hover:bg-fuchsia-600 disabled:bg-fuchsia-300"
+        >
+          {loading ? <ScaleLoader color="#fff" height={20} /> : "Add Note"}
+        </button>
+      </div>
     </form>
   );
 };
