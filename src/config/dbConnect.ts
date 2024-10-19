@@ -12,7 +12,7 @@ export async function connect(): Promise<void> {
     return;
   }
   try {
-    const db = await mongoose.connect(process.env.mongo_url!);
+    const db = await mongoose.connect('mongodb+srv://theabhik2020:P5PjHicCw1T0XSsA@cluster0.27axl.mongodb.net/kprep');
     const connection = mongoose.connection;
 
     connection.on("connection", () => {
