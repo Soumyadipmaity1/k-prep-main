@@ -36,7 +36,7 @@ const Card: React.FC<CardProps> = ({ title, imageSrc, description, pdfUrl }) => 
 
 interface Note {
   subjectFullName: string;
-  sortName: string;
+  subjectsortname: string;
   pdfLine: string;
   credit: string;
 }
@@ -78,7 +78,7 @@ const Home = ({ year }: { year: number }) => {
         <main className="flex space-x-4">
           {loading && <p>Loading...</p>}
           {error && <p className="text-red-500">{error}</p>}
-          {notes.length === 0 ? "No Record" : notes.slice(0, 3).map((item, index) => (
+          {notes.length === 0 ? "No Record" : notes.slice(0, 3).map((item:any, index) => (
             <Card
               key={index}
               title={item.subjectFullName}
