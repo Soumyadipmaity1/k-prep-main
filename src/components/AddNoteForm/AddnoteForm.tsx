@@ -345,7 +345,7 @@
 import { useState, useEffect, ChangeEvent, FormEvent } from "react";
 import toast from "react-hot-toast";
 import ScaleLoader from "react-spinners/ScaleLoader";
-
+import { useSearchParams } from "next/navigation";
 const AddNoteForm: React.FC = () => {
   const [isDisable, setIsDisable] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -459,6 +459,10 @@ const AddNoteForm: React.FC = () => {
     setIsDisable(false);
     setLoading(false);
   };
+
+  //edit code
+  const params = useSearchParams();
+  console.log(params.get("id"));
 
   return (
     <form
