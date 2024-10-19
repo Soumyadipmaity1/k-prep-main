@@ -83,7 +83,7 @@ const Home = ({ year }: { year: number }) => {
               key={index}
               title={item.subjectFullName}
               imageSrc="https://canto-wp-media.s3.amazonaws.com/app/uploads/2019/08/19194138/image-url-3.jpg" // Replace with actual image path if available
-              description={`${item.sortName} (credit: ${item.credit})`}
+              description={`${item.subjectsortname} (credit: ${item.credit})`}
               pdfUrl={item.pdfLine}
             />
           ))}
