@@ -4,24 +4,24 @@ import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 
 type CardProps = {
-  subjectFullName: string;
+  subjectFullname: string;
   description: string;
   subjectcode: string;
   credit: number;
-  pdfUrl: string;
+  pdflink: string;
 };
 
 const Card: React.FC<CardProps> = ({
-  subjectFullName,
+  subjectFullname,
   description,
   subjectcode,
   credit,
-  pdfUrl,
+  pdflink,
 }) => {
   const router = useRouter();
 
   const handleClick = () => {
-    const route = `/cse-notes/2nd-year/3rdSem/${subjectFullName
+    const route = `/cse-notes/2nd-year/3rdSem/${subjectFullname
       .toLowerCase()
       .replace(/ /g, "-")}`;
     router.push(route);
@@ -29,7 +29,7 @@ const Card: React.FC<CardProps> = ({
 
   return (
     <div
-      onClick={handleClick}
+      // onClick={handleClick}
       className="flex subject-card px-5 rounded-xl p-4 shadow-lg sm:m-5 my-3 cursor-pointer"
     >
       <div className="flex w-28 mr-6 rounded-xl items-center bg-white justify-center ">
@@ -39,14 +39,14 @@ const Card: React.FC<CardProps> = ({
       </div>
       <div className="text-start px-4">
         <h2 className="sm:text-2xl text-xl font-bold text-white">
-          {subjectFullName}
+          {subjectFullname}
         </h2>
         <p className="text-white sm:text-base text-[15px]">{description}</p>
         <div className="sm:mt-4 mt-2">
           <p className="text-white">Code: {subjectcode}</p>
           <p className="text-white">Credit: {credit}</p>
           <a
-            href={pdfUrl}
+            href={pdflink}
             className="text-blue-300 underline"
             target="_blank"
             rel="noopener noreferrer"
@@ -119,11 +119,11 @@ const ThirdSemSubject = ({
         notes.map((data, index) => (
           <Card
             key={index}
-            subjectFullName={data.subjectFullName}
+            subjectFullname={data.subjectFullname}
             description={data.description}
             subjectcode={data.subjectcode}
             credit={data.credit}
-            pdfUrl={data.pdfUrl}
+            pdflink={data.pdflink}
           />
         ))
       ) : (
