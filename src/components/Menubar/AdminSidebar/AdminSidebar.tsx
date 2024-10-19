@@ -41,7 +41,10 @@ const AdminSidebar = () => {
         ];
 
   return (
-    <aside className="relative w-64 bg-fuchsia-800 rounded-xl text-white h-[90vh]">
+    <aside className="relative w-64  rounded-xl text-white h-[90vh]">
+      <div className="fixed w-64 bg-fuchsia-800 rounded-xl text-white h-[90vh]">
+
+ 
       <div className="p-4 border-b border-gray-700">
         <p className="text-lg font-semibold">{user.name}</p>
         <p className="text-sm text-gray-400">{user.role}</p>
@@ -71,6 +74,7 @@ const AdminSidebar = () => {
         >
           Logout
         </button>
+      </div>
       </div>
     </aside>
   );
