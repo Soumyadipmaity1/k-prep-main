@@ -28,6 +28,7 @@ export async function GET(request: NextRequest) {
         }
       );
     } else if (year && sem) {
+      console.log(year, sem);
       const notes = await Resource.find({
         year: year,
         semister: new RegExp(sem),
