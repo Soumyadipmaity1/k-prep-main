@@ -1,12 +1,25 @@
 import { NextRequest, NextResponse } from "next/server";
 import Resource from "@/models/note.model";
 import { connect } from "@/config/dbConnect";
+import { isAuthenticated } from "@/lib/Auth";
 
 // Establish database connection before handling the request
 connect();
 
 export async function PUT(request: NextRequest) {
+  
   try {
+    const status = await isAuthenticated(request);
+    if (!status) {
+      return NextResponse.json(
+        {
+          message: "Unauthorized user",
+        },
+        {
+          status: 401,
+        }
+      );
+    }
     const { searchParams } = new URL(request.url);
     const getId = searchParams.get("id");
 
