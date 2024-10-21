@@ -1,10 +1,22 @@
 import { connect } from "@/config/dbConnect";
 import { NextRequest, NextResponse } from "next/server";
 import User from "@/models/user.model";
+import { isAuthenticated } from "@/lib/Auth";
 
 connect();
 
 export async function GET(request: NextRequest) {
+  const status = await isAuthenticated(request);
+  if (!status) {
+    return NextResponse.json(
+      {
+        message: "Unauthorized user",
+      },
+      {
+        status: 401,
+      }
+    );
+  }
   const { searchParams } = new URL(request.url);
   const email = searchParams.get("email");
   try {
