@@ -1,7 +1,9 @@
-export function isAuthenticated() {
-    if (typeof window !== 'undefined') {
-        const token = localStorage.getItem('token') && localStorage.getItem('token');
-        return token;
-    }
-    return false; // Return false or handle the case when not in the browser environment
+import { NextApiRequest } from "next";
+import { getToken } from "next-auth/jwt";
+import { NextRequest } from "next/server";
+
+export async function isAuthenticated(request:NextRequest) {
+  const secret = process.env.TOKEN_SECRET!;
+  const authorize = await getToken({ req: request, secret });
+  return authorize;
 }
