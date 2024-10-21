@@ -15,10 +15,10 @@ const LoginPage = () => {
   const [error, setError] = useState("Invalid credentials");
   const [success, setSuccess] = useState("Login successful");
   const router = useRouter();
-  const isAuth = isAuthenticated();
-  if (isAuth) {
-    redirect("/login/admin/add-note");
-  }
+  // const isAuth = isAuthenticated();
+  // if (isAuth) {
+  //   redirect("/login/admin/add-note");
+  // }
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsDisable(true);
