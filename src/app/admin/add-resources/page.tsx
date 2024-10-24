@@ -42,7 +42,7 @@ const AddUser = () => {
             htmlFor="name"
             className="block  text-lg font-semibold text-fuchsia-800"
           >
-           First Name
+           Subject Title
           </label>
           <input
             type="text"
@@ -59,7 +59,7 @@ const AddUser = () => {
             htmlFor="name"
             className="block  text-lg font-semibold text-fuchsia-800"
           >
-            Last Name
+            Resources Title
           </label>
           <input
             type="text"
@@ -76,7 +76,7 @@ const AddUser = () => {
             htmlFor="email"
             className="block text-lg font-semibold text-fuchsia-800"
           >
-            Email
+            Resources Description
           </label>
           <input
             type="email"
