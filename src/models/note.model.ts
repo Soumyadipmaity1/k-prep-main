@@ -32,7 +32,7 @@ interface IResourceModel {
   credit: number;
   subjectcode: string;
   year: string;
-  semester: string; // Corrected 'semister' to 'semester'
+  semister: string; // Corrected 'semister' to 'semester'
   scheme?: string;
   notes?: Array<ObjectId>; // Specified type for notes as an array of ObjectId
 }
@@ -56,7 +56,7 @@ const ResourceSchema = new Schema<IResourceModel>(
       type: String,
       required: [true, "Please specify the year."],
     },
-    semester: {
+    semister: {
       type: String,
       required: [true, "Please specify the semester."],
     },
