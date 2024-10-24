@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-
+import { FaBook } from "react-icons/fa";
 type CardProps = {
   subjectFullname: string;
   description: string;
@@ -30,11 +30,11 @@ const Card: React.FC<CardProps> = ({
   return (
     <div
       // onClick={handleClick}
-      className="flex subject-card px-5 rounded-xl p-4 shadow-lg sm:m-5 my-3 cursor-pointer"
+      className="flex subject-card px-5 rounded-xl p-4 shadow-lg sm:m-5 my-3 cursor-pointer h-[190px] lg:w-5/12 w-full"
     >
-      <div className="flex w-28 mr-6 rounded-xl items-center bg-white justify-center ">
-        <div className="rounded-full flex items-center justify-center">
-          <span className="text-3xl font-bold text-purple-500">👤</span>
+      <div className="flex w-28 mr-6 rounded-xl items-center  justify-center ">
+        <div className="rounded-full flex items-center justify-center bg-white p-5">
+          <span className="text-3xl font-bold text-purple-500"><FaBook /></span>
         </div>
       </div>
       <div className="text-start px-4">
