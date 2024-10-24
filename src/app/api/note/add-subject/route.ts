@@ -8,25 +8,22 @@ connect();
 
 export async function POST(request: NextRequest) {
   try {
-
-    const status = await isAuthenticated(request);
-    if (!status) {
-      return NextResponse.json(
-        {
-          message: "Unauthorized user",
-        },
-        {
-          status: 401,
-        }
-      );
-    }
+    // const status = await isAuthenticated(request);
+    // if (!status) {
+    //   return NextResponse.json(
+    //     {
+    //       message: "Unauthorized user",
+    //     },
+    //     {
+    //       status: 401,
+    //     }
+    //   );
+    // }
 
     // Parse JSON request body
     const {
       subjectFullname,
-      pdflink,
-      resourcestitle,
-      subjectsortname,
+
       credit,
       subjectcode,
       year,
@@ -35,9 +32,6 @@ export async function POST(request: NextRequest) {
     } = await request.json();
     if (
       !subjectFullname ||
-      !pdflink ||
-      !resourcestitle ||
-      !subjectsortname ||
       credit === undefined || // Check for credit as a number field
       !subjectcode ||
       !year ||
@@ -51,13 +45,10 @@ export async function POST(request: NextRequest) {
         { status: 400 }
       );
     }
-    
+
     // Create and save new resource document
     const newResource = new Resource({
       subjectFullname,
-      pdflink,
-      resourcestitle,
-      subjectsortname,
       credit,
       subjectcode,
       year,
@@ -77,6 +68,7 @@ export async function POST(request: NextRequest) {
       { status: 201 }
     );
   } catch (error: any) {
+    console.log(error.message);
     // Handle errors and return a failure response
     return NextResponse.json(
       {

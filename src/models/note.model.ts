@@ -2,15 +2,12 @@ import mongoose, { Schema, model, models } from "mongoose";
 
 // TypeScript interface to define the document structure
 interface IResource {
-  subjectFullname: string;
-  pdflink: string;
-  resourcestitle: string;
-  subjectsortname: string;
-  credit: number;
-  subjectcode: string;
-  year: string;
-  semister: string;
-  scheme: string;
+  subjectFullname: string; 
+  credit: number; 
+  subjectcode: string; 
+  year: string; 
+  semister: string; 
+  scheme?: string; 
 }
 
 // Define Mongoose Schema
@@ -19,18 +16,6 @@ const ResourceSchema = new Schema<IResource>(
     subjectFullname: {
       type: String,
       required: [true, "Please provide the full name of the subject."],
-    },
-    pdflink: {
-      type: String,
-      required: [true, "Please provide a link to the PDF resource."],
-    },
-    resourcestitle: {
-      type: String,
-      required: [true, "Please provide the resource title."],
-    },
-    subjectsortname: {
-      type: String,
-      required: [true, "Please provide the short name of the subject."],
     },
     credit: {
       type: Number,
@@ -54,12 +39,12 @@ const ResourceSchema = new Schema<IResource>(
     },
   },
   {
-    timestamps: true,
+    timestamps: true, // Automatically manage createdAt and updatedAt fields
   }
 );
 
 // Create the model only if it doesn't already exist
-const Resource =
-  models.Resource || model<IResource>("Resource", ResourceSchema);
+const Resource = models.Resource || model<IResource>("Resource", ResourceSchema);
 
+// Export the model
 export default Resource;
