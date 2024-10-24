@@ -3,12 +3,14 @@
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { FaBook } from "react-icons/fa";
+import { usePathname } from "next/navigation";
 type CardProps = {
   subjectFullname: string;
   description: string;
   subjectcode: string;
   credit: number;
   pdflink: string;
+  _id: string;
 };
 
 const Card: React.FC<CardProps> = ({
@@ -17,13 +19,15 @@ const Card: React.FC<CardProps> = ({
   subjectcode,
   credit,
   pdflink,
+  _id
 }) => {
   const router = useRouter();
-
-  const handleClick = () => {
-    const route = `/cse-notes/2nd-year/3rdSem/${subjectFullname
+  const pathname = usePathname();
+  // console.log(pathname)
+  const goToSubjectPage = () => {
+    const route = `${pathname}/${subjectFullname
       .toLowerCase()
-      .replace(/ /g, "-")}`;
+      .replace(/ /g, "-")}?id=${_id}`;
     router.push(route);
   };
 
@@ -34,7 +38,9 @@ const Card: React.FC<CardProps> = ({
     >
       <div className="flex w-28 mr-6 rounded-xl items-center  justify-center ">
         <div className="rounded-full flex items-center justify-center bg-white p-5">
-          <span className="text-3xl font-bold text-purple-500"><FaBook /></span>
+          <span className="text-3xl font-bold text-purple-500">
+            <FaBook />
+          </span>
         </div>
       </div>
       <div className="text-start px-4">
@@ -45,14 +51,15 @@ const Card: React.FC<CardProps> = ({
         <div className="sm:mt-4 mt-2">
           <p className="text-white">Code: {subjectcode}</p>
           <p className="text-white">Credit: {credit}</p>
-          <a
-            href={pdflink}
+          <div
+            onClick={goToSubjectPage}
+            // href={pdflink}
             className="text-blue-300 underline"
-            target="_blank"
+            // target="_blank"
             rel="noopener noreferrer"
           >
             View Resources
-          </a>
+          </div>
         </div>
       </div>
     </div>
@@ -93,6 +100,7 @@ const ThirdSemSubject = ({
       try {
         const fetchedNotes = await fetchNotes(year, sem); // Fetch notes by year and semester
         setNotes(fetchedNotes);
+        console.log(fetchedNotes);
       } catch (err) {
         setError(
           err instanceof Error ? err.message : "An unknown error occurred"
@@ -118,6 +126,7 @@ const ThirdSemSubject = ({
       {notes && notes.length > 0 ? (
         notes.map((data, index) => (
           <Card
+            _id={data._id}
             key={index}
             subjectFullname={data.subjectFullname}
             description={data.description}
