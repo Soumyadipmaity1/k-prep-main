@@ -14,7 +14,7 @@ export type NoteType = {
 const Subject1 = () => {
   const [notes, setNotes] = useState<NoteType[]>([]);
   const searchParams = useSearchParams();
-  const ID = searchParams.get("id");
+  const ID ='671a01fd494ba42bea8c22e5'
 
   useEffect(() => {
     const fetchNotes = async () => {
