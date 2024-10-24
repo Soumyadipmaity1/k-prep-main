@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import Note from "@/models/resources.model"; // Assuming this is correct
-import Resource from "@/models/note.model"; // Ensure this is the correct model for your resources
+import {Resource} from "@/models/note.model"; // Ensure this is the correct model for your resources
 import { connect } from "@/config/dbConnect";
 
 // Establish database connection before handling the request

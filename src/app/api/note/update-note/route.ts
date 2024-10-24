@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import Resource from "@/models/note.model";
+import {Resource} from "@/models/note.model";
 import { connect } from "@/config/dbConnect";
 import { isAuthenticated } from "@/lib/Auth";
 
