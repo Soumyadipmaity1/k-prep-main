@@ -16,7 +16,7 @@ const FeatureCard: React.FC<ContactOptionProps> = ({
   buttonLink,
 }) => {
   return (
-    <div className={`p-6 font-denk border-purple-600 shadow-md bg-purple-50 border-2 w-72 mx-auto rounded-lg  text-center  ${denkOne.className}`}>
+    <div className={`2xl:p-6 p-4 font-denk border-purple-600 shadow-md bg-purple-50 border-2 2xl:w-[299px] xl:w-[280px] sm:w-[250px] mx-auto rounded-lg  text-center  ${denkOne.className}`}>
       <div className="text-center flex justify-center mt-2 mb-6">
         <Icon className="text-5xl bg-transparent  text-center text-purple-700" />
       </div>
