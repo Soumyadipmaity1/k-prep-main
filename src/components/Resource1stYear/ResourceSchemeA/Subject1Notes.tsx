@@ -1,3 +1,4 @@
+"use client";
 import React, { useState, useEffect } from "react";
 import { NoteType } from "@/app/cse-notes/2nd-year/3rdSem/[subjectName]/page";
 
@@ -14,7 +15,9 @@ const Subject1Notes = ({ notes }: { notes: NoteType[] }) => {
   if (loading) {
     return (
       <div className="flex justify-center items-center h-64">
-        <p className="text-xl text-purple-600 font-semibold">Loading notes...</p>
+        <p className="text-xl text-purple-600 font-semibold">
+          Loading notes...
+        </p>
       </div>
     );
   }

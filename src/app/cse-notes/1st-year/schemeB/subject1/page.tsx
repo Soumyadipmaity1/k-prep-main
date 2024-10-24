@@ -7,7 +7,7 @@ const Subject1 = () => {
 <h1 className="text-center  text-4xl"><span className="modal-text ">Pick your notes!</span></h1>
 <div className="sm:mt-10 mt-5">
 
-<Subject1Notes/>
+{/* <Subject1Notes/> */}
 </div>
 
           </div>
