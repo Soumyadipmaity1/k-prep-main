@@ -1,18 +1,44 @@
 import mongoose, { Schema, model, models, ObjectId } from "mongoose";
 
-// TypeScript interface to define the document structure
+// Define Notes Schema first
 interface IResource {
+  subjectFullNameId: ObjectId;
+  resourceTitle: string;
+  description: string;
+  url: string;
+  rating?: number;
+}
+
+// Notes Schema
+const NotesSchema = new Schema<IResource>(
+  {
+    subjectFullNameId: { type: mongoose.Schema.ObjectId, ref: "Resource" },
+    resourceTitle: { type: String, required: true },
+    description: { type: String, required: true },
+    url: { type: String, required: true },
+    rating: { type: Number, required: false, default: 0 },
+  },
+  {
+    timestamps: true,
+  }
+);
+
+// Create Notes model if it doesn't already exist
+const Notes = models.Notes || model<IResource>("Notes", NotesSchema);
+
+// Define Resource Schema next
+interface IResourceModel {
   subjectFullname: string;
   credit: number;
   subjectcode: string;
   year: string;
-  semister: string; // Corrected 'semister' to 'semester'
+  semester: string; // Corrected 'semister' to 'semester'
   scheme?: string;
   notes?: Array<ObjectId>; // Specified type for notes as an array of ObjectId
 }
 
-// Define Mongoose Schema
-const ResourceSchema = new Schema<IResource>(
+// Resource Schema
+const ResourceSchema = new Schema<IResourceModel>(
   {
     subjectFullname: {
       type: String,
@@ -30,8 +56,7 @@ const ResourceSchema = new Schema<IResource>(
       type: String,
       required: [true, "Please specify the year."],
     },
-    semister: {
-      // Changed 'semister' to 'semester'
+    semester: {
       type: String,
       required: [true, "Please specify the semester."],
     },
@@ -39,16 +64,16 @@ const ResourceSchema = new Schema<IResource>(
       type: String,
       required: false,
     },
-    notes: [{ type: mongoose.Schema.ObjectId, ref: "Notes" }], 
+    notes: [{ type: mongoose.Schema.ObjectId, ref: "Notes" }], // Correct ref here
   },
   {
-    timestamps: true, 
+    timestamps: true,
   }
 );
 
-// Create the model only if it doesn't already exist
+// Create Resource model if it doesn't already exist
 const Resource =
-  models.Resource || model<IResource>("Resource", ResourceSchema);
+  models.Resource || model<IResourceModel>("Resource", ResourceSchema);
 
-// Export the model
-export default Resource;
+// Export both models
+export { Resource, Notes };

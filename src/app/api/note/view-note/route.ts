@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import Resource from "@/models/note.model";
+import { Resource } from "@/models/note.model";
 import { connect } from "@/config/dbConnect";
 import { getToken } from "next-auth/jwt";
 import { isAuthenticated } from "@/lib/Auth";
@@ -43,11 +43,12 @@ export async function GET(request: NextRequest) {
         }
       );
     } else if (year && sem) {
-      console.log(year, sem);
+      // console.log(year, sem);
       const notes = await Resource.find({
         year: year,
         semister: new RegExp(sem),
       });
+      // console.log(notes)
       return NextResponse.json(
         {
           success: true,
@@ -60,16 +61,34 @@ export async function GET(request: NextRequest) {
     } else if (year) {
       const notes = await Resource.find({
         year: year,
+      })
+        .populate({
+          path: "notes", // Populates notes
+          populate: {
+            path: "subjectFullNameId",
+            select:"credit subjectcode subjectFullname"
+          },
+        })
+        .select("notes");
+      
+      let data: any[] = [];
+      notes.forEach((item) => {
+        if (item.notes && item.notes.length > 0) {
+          data.push(...item.notes); // Use spread operator to push individual notes into the array
+        }
       });
+      
+      // Return the response with the populated notes
       return NextResponse.json(
         {
           success: true,
-          notes,
+          notes: data,
         },
         {
           status: 200,
         }
       );
+      
     } else if (id) {
       const notes = await Resource.findById(id);
       return NextResponse.json(

@@ -46,10 +46,13 @@ const Card: React.FC<CardProps> = ({
 };
 
 interface Note {
-  subjectFullName: string;
-  subjectsortname: string;
-  pdflink: string;
-  credit: string;
+  url: string;
+  resourceTitle: string;
+  subjectFullNameId: {
+    credit: number;
+    subjectFullname: string;
+    subjectcode: string;
+  };
 }
 
 const fetchNotes = async (year: number): Promise<Note[]> => {
@@ -72,6 +75,7 @@ const Home = ({ year }: { year: number }) => {
     try {
       const fetchedNotes = await fetchNotes(year);
       setNotes(fetchedNotes);
+      console.log(fetchedNotes);
     } catch (err) {
       setError(
         err instanceof Error ? err.message : "An unknown error occurred"
@@ -94,15 +98,17 @@ const Home = ({ year }: { year: number }) => {
         <main className="flex space-x-4">
           {loading && <p>Loading...</p>}
           {error && <p className="text-red-500">{error}</p>}
-          {notes.length === 0 ? "No Record" : notes.slice(0, 3).map((item, index) => (
-            <Card
-              key={index}
-              title={item.subjectFullName}
-              imageSrc="" // Replace with actual image path if available
-              description={`${item.subjectsortname} (credit: ${item.credit})`}
-              pdflink={item.pdflink}
-            />
-          ))}
+          {notes.length === 0
+            ? "No Record"
+            : notes.slice(0, 3).map((item, index) => (
+                <Card
+                  key={index}
+                  title={item.resourceTitle}
+                  imageSrc="" // Replace with actual image path if available
+                  description={`${item.subjectFullNameId.subjectcode} (credit: ${item.subjectFullNameId.credit})`}
+                  pdflink={item.url}
+                />
+              ))}
         </main>
       </div>
     </div>
