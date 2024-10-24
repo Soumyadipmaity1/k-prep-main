@@ -359,7 +359,7 @@ const AddNoteForm: React.FC = () => {
   const [credit, setCredit] = useState<string>("");
   const [subjectcode, setSubjectCode] = useState<string>("");
   const [semister, setSemester] = useState<string>("");
-  const [pdflink, setPdfLink] = useState<string>("");
+  // const [pdflink, setPdfLink] = useState<string>("");
   const [scheme, setScheme] = useState<string>("");
 
   const [error, setError] = useState<string>("");
@@ -390,7 +390,6 @@ const AddNoteForm: React.FC = () => {
       subjectcode &&
       year &&
       semister &&
-      pdflink &&
       (year !== "1" || scheme); // For year 1, scheme must be selected
 
     if (!isValid) {
@@ -420,7 +419,7 @@ const AddNoteForm: React.FC = () => {
         subjectcode,
         year,
         semister,
-        pdflink,
+
         ...(year === "1" && { scheme }), // Add scheme only for 1st year
       };
 
@@ -443,7 +442,7 @@ const AddNoteForm: React.FC = () => {
         setSubjectCode("");
         setYear("");
         setSemester("");
-        setPdfLink("");
+      
         setScheme("");
         setSemesterOptions([]);
         toast.success("Note added successfully");
@@ -626,7 +625,7 @@ const AddNoteForm: React.FC = () => {
         )}
 
         {/* PDF Link */}
-        <div className="bg-fuchsia-100">
+        {/* <div className="bg-fuchsia-100">
           <label className="block text-fuchsia-900 text-lg font-semibold mb-2">
             PDF Link:
           </label>
@@ -640,7 +639,7 @@ const AddNoteForm: React.FC = () => {
               setPdfLink(e.target.value)
             }
           />
-        </div>
+        </div> */}
       </div>
 
       {/* Error Message */}

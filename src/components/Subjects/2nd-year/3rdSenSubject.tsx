@@ -51,7 +51,7 @@ const Card: React.FC<CardProps> = ({
             target="_blank"
             rel="noopener noreferrer"
           >
-            View Notes
+            View Resources
           </a>
         </div>
       </div>
