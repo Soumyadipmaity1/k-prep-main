@@ -11,9 +11,9 @@ const AddNoteForm: React.FC = () => {
   const [creditOptions] = useState<string[]>(["1", "2", "3", "4"]);
 
   const [subjectFullname, setSubjectFullName] = useState<string>("");
-  const [subjectCode, setSubjectCode] = useState<string>("");
+  const [subjectcode, setSubjectCode] = useState<string>(""); // Changed to subjectcode
   const [credit, setCredit] = useState<string>("");
-  const [semester, setSemester] = useState<string>("");
+  const [semister, setSemister] = useState<string>(""); // Changed to semister
   const [scheme, setScheme] = useState<string>("");
 
   const [error, setError] = useState<string>("");
@@ -31,10 +31,10 @@ const AddNoteForm: React.FC = () => {
   const validateForm = () => {
     const isValid =
       subjectFullname &&
-      subjectCode &&
+      subjectcode && // Updated validation
       credit &&
       year &&
-      semester &&
+      semister && // Updated validation
       (year !== "1" || scheme);
 
     if (!isValid) {
@@ -58,14 +58,14 @@ const AddNoteForm: React.FC = () => {
     try {
       const payload = {
         subjectFullname,
-        subjectCode,
+        subjectcode, // Updated to subjectcode
         credit,
         year,
-        semester,
+        semister, // Updated to semister
         ...(year === "1" && { scheme }),
       };
 
-      const res = await fetch("/api/note/add-note", {
+      const res = await fetch("/api/note/add-subject", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -77,10 +77,10 @@ const AddNoteForm: React.FC = () => {
 
       if (res.ok) {
         setSubjectFullName("");
-        setSubjectCode("");
+        setSubjectCode(""); // Updated to subjectcode
         setCredit("");
         setYear("");
-        setSemester("");
+        setSemister(""); // Updated to semister
         setScheme("");
         setSemesterOptions([]);
 
@@ -159,9 +159,9 @@ const AddNoteForm: React.FC = () => {
             type="text"
             className={inputStyles}
             placeholder="Enter Subject Code"
-            value={subjectCode}
+            value={subjectcode} // Updated to subjectcode
             onChange={(e: ChangeEvent<HTMLInputElement>) =>
-              setSubjectCode(e.target.value)
+              setSubjectCode(e.target.value) // Updated to subjectcode
             }
           />
         </div>
@@ -194,9 +194,9 @@ const AddNoteForm: React.FC = () => {
           <select
             disabled={isDisable}
             className={inputStyles}
-            value={semester}
+            value={semister} // Updated to semister
             onChange={(e: ChangeEvent<HTMLSelectElement>) =>
-              setSemester(e.target.value)
+              setSemister(e.target.value) // Updated to semister
             }
           >
             <option value="">Select Semester</option>

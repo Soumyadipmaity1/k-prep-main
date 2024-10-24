@@ -30,6 +30,15 @@ export async function POST(request: NextRequest) {
       semister,
       scheme,
     } = await request.json();
+    console.log(
+      subjectFullname,
+
+      credit,
+      subjectcode,
+      year,
+      semister,
+      scheme
+    );
     if (
       !subjectFullname ||
       credit === undefined || // Check for credit as a number field
