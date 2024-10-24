@@ -27,14 +27,14 @@ const AdminSidebar = () => {
     session?.user?.role != "admin"
       ? [
           { name: "Dashboard", path: "/admin" },
-          { name: "Add Note", path: "/admin/add-note" },
+          { name: "Add Subject", path: "/admin/add-subject" },
           { name: "Add Resources", path: "/admin/add-resources" },
           { name: "View Notes", path: "/admin/view-note" },
           { name: "Profile", path: "/admin/view-profile" },
         ]
       : [
           { name: "Dashboard", path: "/admin" },
-          { name: "Add Note", path: "/admin/add-note" },
+          { name: "Add Subject", path: "/admin/add-subject" },
           { name: "Add Resources", path: "/admin/add-resources" },
           { name: "Add User", path: "/admin/add-user" },
           { name: "View Notes", path: "/admin/view-note" },
