@@ -1,5 +1,12 @@
 import React from 'react';
 import { denkOne } from '@/app/font';
+import { Catamaran } from 'next/font/google';
+
+const catamaran = Catamaran({
+  subsets: ['latin'],
+  weight: ['400', '500','600' ,'700'],
+  display: 'swap',
+});
 interface ContactOptionProps {
   icon: React.ElementType;
   title: string;
@@ -21,7 +28,7 @@ const FeatureCard: React.FC<ContactOptionProps> = ({
         <Icon className="text-5xl bg-transparent  text-center text-purple-700" />
       </div>
       <h3 className="sm:text-2xl text-xl font-semibold mb-2 text-[#843ab1]">{title}</h3>
-      <p className="text-gray-600 font-extralight sm:text-base text-sm">{description}</p>
+      <p className="text-gray-600 font-catamaran font-normal sm:text-base text-sm">{description}</p>
       {/* <a
         href={buttonLink}
         className="inline-block px-4 py-1 bg-transparent text-purple-600 font-semibold mt-4 hover:text-white border-purple-600 border-2 rounded-md hover:bg-purple-700 transition"
