@@ -4,14 +4,14 @@ import { teamMembers } from './memberDetails';
 
 const Team: React.FC = () => {
   return (
-    <div className=' bg-gradient-to-r rounded-xl bg-team from-[#C476F0] to-[#EE85BB] py-10 sm:p-10'>
+    <div className=' bg-gradient-to-r rounded-xl bg-team from-[#C476F0] to-[#EE85BB] py-10 lg:p-10'>
       <div className="text-center">
         <h1 className="text-5xl font-bold tracking-[0.5px] text-[#231D1F]">Our Team</h1>
         <p className="p-5 pb-10 text-[#1d1d1d] text-center">
         Curious to know the names and faces behind this beauty!!? Meet our team; they are the secret of all our resources!!!
         </p>
       </div>
-      <div className="flex flex-wrap justify-around pt-10 2xl:mx-20 xl:mx-5">
+      <div className="flex flex-wrap justify-around pt-10 2xl:mx-20 xl:mx-5 mx-5 sm:mx-5">
         {teamMembers.map((member, index) => (
           <div key={index} className="flex flex-col items-center justify-center mb-10">
             <div className="mb-4">
