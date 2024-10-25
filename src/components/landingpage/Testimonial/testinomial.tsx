@@ -1,6 +1,14 @@
 import React from 'react';
 import { FaStar } from 'react-icons/fa';
 import Image from 'next/image';
+import { Catamaran } from 'next/font/google';
+
+const catamaran = Catamaran({
+  subsets: ['latin'],
+  weight: ['400', '500', '700'],
+  display: 'swap',
+});
+
 const testimonials = [
   {
     name: 'name',
@@ -29,7 +37,7 @@ const Testimonials: React.FC = () => {
     <section className="bg-white py-10 pb-16 lg:px-16">
       <div className="container mx-auto text-center">
         <h2 className="sm:text-5xl text-[38px] font-bold mb-6">What our users say about us?</h2>
-        <p className="text-gray-600 mb-12 px-4 font-sans font-semibold text-lg sm:px-16">
+        <p className="text-gray-600 mb-12 px-4 font-catamaran  font-normal text-lg sm:px-16">
         Has your benchmates been making better notes lately?!! They might be using K-prep. We assist trusted 500+ users with a database of 200+ notes and more.
         Let&rsquo;s hear them and find out what our valued users think about us!!  
         Feel free to add your comment and join our K-prep family!
