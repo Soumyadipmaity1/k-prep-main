@@ -2,6 +2,13 @@
 import { FC } from 'react';
 import { FaBook, FaUsers, FaFileAlt } from 'react-icons/fa';
 import Image from 'next/image';
+import { Catamaran } from 'next/font/google';
+
+const catamaran = Catamaran({
+  subsets: ['latin'],
+  weight: ['400', '500', '700'],
+  display: 'swap',
+});
 
 const Hero: FC = () => {
   return (
@@ -10,7 +17,7 @@ const Hero: FC = () => {
         <h1 className="sm:text-7xl text-5xl font-bold mb-4">READ, LEARN,</h1>
         <h1 className="sm:text-7xl text-5xl font-bold mb-4"> ACE!</h1>
 
-        <p className="text-gray-600 sm:mb-6 sm:px-0 px-4 text-justify font-semibold  sm:mt-8 mt-5 font-sans">
+        <p className="text-gray-600 sm:mb-6 sm:px-0 px-4 text-justify font-semibold font-catamaran sm:mt-8 mt-5">
         Do you also feel left out when you miss a lecture or two and the notes become inconsistent!? Well, not now,
 Join K-prep for all subjects&apos; class notes, labs, and ace your exam prep with our PYQs.
 We bring all these materials under one platform, curated just for your needs.
