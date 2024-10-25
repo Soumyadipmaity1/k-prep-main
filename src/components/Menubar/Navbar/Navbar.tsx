@@ -88,7 +88,7 @@ const Nav = () => {
 
   return (
     <div>
-      <div className={`sticky z-50 sm:flex hidden  gap-5 ${denkOne.className}`}>
+      <div className={`sticky z-50 lg:flex hidden  gap-5 ${denkOne.className}`}>
         <div className="w-1/12 rounded-xl bg-gradient-to-r from-[#6b03a8] to-[#843ab1]">
           <Link href="/" passHref>
             <div className="w-16 h-16">
@@ -133,9 +133,9 @@ const Nav = () => {
 
       {/*  for mobileNAVBAR */}
 
-      <div className={`sticky z-50 flex sm:hidden px-1 sm:gap-5 ${denkOne.className}`}>
-        <nav className=" w-full  items-center rounded-xl px-8 py-2 bg-gradient-to-r from-[#843AB1] to-[#D57EBD]">
-          <ul className="flex justify-between  text-white">
+      <div className={`sticky z-50 flex lg:hidden px-1 sm:gap-5 ${denkOne.className}`}>
+        <nav className=" w-full sm:grid sm:grid-cols-2 items-center rounded-xl px-8 py-2 bg-gradient-to-r from-[#843AB1] to-[#D57EBD]">
+          <ul className="flex justify-between text-white">
             {navLinks.map((link) => (
               <li key={link.href} className="my-2 sm:my-0">
                 <button
@@ -147,12 +147,27 @@ const Nav = () => {
               </li>
             ))}
           </ul>
+          <div className="flex space-x-4 pl-9 items-center justify-center">
+            <div className="relative hidden sm:block">
+              <form onSubmit={handleSearch}>
+                <input
+                  type="text"
+                  placeholder="Search..."
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)} // Update search input
+                  className="border w-[260px] border-gray-300 rounded-full bg-[#ffffffa4] py-2 px-4 pl-10 focus:outline-none focus:border-purple-600"
+                />
+                <FaSearch className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
+              </form>
+            </div>
+          </div>
         </nav>
         <ModalMenu
           isOpen={isModalOpen}
           onClose={() => setIsModalOpen(false)}
           items={modalItems}
         />
+       
       </div>
     </div>
   );
