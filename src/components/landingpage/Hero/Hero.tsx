@@ -5,8 +5,8 @@ import Image from 'next/image';
 
 const Hero: FC = () => {
   return (
-    <section className="flex flex-col md:flex-row sm:gap-20 items-center justify-between  sm:px-16 bg-white">
-      <div className="sm:w-3/5 mb-6 md:mb-0 mt-10 text-center sm:text-start">
+    <section className="flex flex-col-reverse lg:flex-row lg:gap-20 items-center justify-between sm:px-16 bg-white">
+      <div className="lg:w-3/5 mb-6 md:mb-0 mt-10 text-center lg:text-start">
         <h1 className="sm:text-7xl text-5xl font-bold mb-4">READ, LEARN,</h1>
         <h1 className="sm:text-7xl text-5xl font-bold mb-4"> ACE!</h1>
 
@@ -20,7 +20,7 @@ With our help, you&rsquo;ll always catch up on your academic prep!
           Explore More
         </button>
       </div>
-      <div className=" relative sm:w-3/5 hidden sm:flex flex-col items-center">
+      <div className=" relative sm:w-full lg:w-3/5 hidden sm:flex flex-col items-center">
 
         <Image src="/hero.png" alt="Read, Learn, Ace" width={944} height={544} className="rounded-lg w-[900px]" />
 
