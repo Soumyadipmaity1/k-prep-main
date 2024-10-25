@@ -21,7 +21,7 @@ function SearchPage() {
         <div className="bg-gradient-to-b from-[#ffffff] to-[#fdf4f9]">
             <Navbar />
             
-            <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-5 pt-10">
+            <main className="max-w-7xl mx-auto min-h-[80vh] px-4 sm:px-6 lg:px-8 py-5 pt-10">
                 <div className="mb-5">
                     <div className="flex items-center space-x-3 mb-6">
                         <FiSearch className="w-8 h-8 text-[#843AB1]" />
