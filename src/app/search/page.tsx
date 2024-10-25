@@ -2,20 +2,26 @@
 
 import Footer from '@/components/Footer/footer';
 import Navbar from '@/components/Menubar/Navbar/Navbar';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { FiSearch } from 'react-icons/fi';
 
 function SearchPage() {
     const [loading, setLoading] = useState(false);
-    const searchParams = new URLSearchParams(window.location.search);
-    const query = searchParams.get('query') || '';
+    const [query, setQuery] = useState('');
+
+    useEffect(() => {
+
+        if (typeof window !== "undefined") {
+            const searchParams = new URLSearchParams(window.location.search);
+            setQuery(searchParams.get('query') || '');
+        }
+    }, []);
 
     return (
-        <div className=" bg-gradient-to-b from-[#ffffff] to-[#fdf4f9]">
+        <div className="bg-gradient-to-b from-[#ffffff] to-[#fdf4f9]">
             <Navbar />
             
             <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-5 pt-10">
-
                 <div className="mb-5">
                     <div className="flex items-center space-x-3 mb-6">
                         <FiSearch className="w-8 h-8 text-[#843AB1]" />
