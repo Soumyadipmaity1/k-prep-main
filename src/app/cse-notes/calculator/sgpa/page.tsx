@@ -14,7 +14,7 @@ const subjects: Subject[] = [
   { name: 'CN LAB', credits: 1, grade: null },
   { name: 'DAA', credits: 3, grade: null },
   { name: 'DAA LAB', credits: 1, grade: null },
-  { name: 'EE', credits: 3, grade: null },
+  { name: 'EE', credits: 3, grade : null },
   { name: 'HPC/DOS', credits: 3, grade: null },
   { name: 'DMDW/CI/Compiler', credits: 3, grade: null },
 ];
