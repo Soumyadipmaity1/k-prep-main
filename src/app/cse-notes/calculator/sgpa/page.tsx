@@ -81,7 +81,7 @@ const FifthSemSGPACalculator = () => {
 
   return (
     <div className="w-full h-full bg-[#f8e9f4] overflow-y-auto border rounded-xl border-gray-300 ">
-      <div className="max-w-7xl max-h-screen mx-auto p-4 sm:p-6 px-3 py-5 sm:p-10">
+      <div className="max-w-7xl max-h-screen mx-auto p-4 px-3 py-5 sm:p-10">
 
         <div className="subject-card p-6 rounded-2xl mb-6">
           <div className="flex items-center justify-center gap-3">
