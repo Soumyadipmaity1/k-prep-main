@@ -8,15 +8,16 @@ import toast from "react-hot-toast";
 import ScaleLoader from "react-spinners/ScaleLoader";
 
 const AddUser = () => {
+  console.log("----------------------->")
   const router = useRouter();
   const { data: session } = useSession();
 
   // Redirect if user is not an admin
-  useEffect(() => {
-    if (session?.user.role !== "admin") {
-      router.push("/admin");
-    }
-  }, [session, router]);
+  // useEffect(() => {
+  //   if (session?.user.role !== "admin") {
+  //     router.push("/admin");
+  //   }
+  // }, [session, router]);
 
   const [subjectTitles, setSubjectTitles] = useState<any[]>([]);
   const [formData, setFormData] = useState({
@@ -33,6 +34,7 @@ const AddUser = () => {
       try {
         const { data } = await axios.get("/api/note/get-subject");
         setSubjectTitles(data.resource);
+        console.log(data)
       } catch (error) {
         console.error("Error fetching subject titles:", error);
       }
@@ -41,7 +43,10 @@ const AddUser = () => {
     getSubjectTitles();
   }, []);
 
+  console.log(subjectTitles)
   
+
+
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => {
@@ -189,3 +194,8 @@ const AddUser = () => {
 };
 
 export default AddUser;
+
+
+
+
+
