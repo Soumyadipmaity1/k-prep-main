@@ -249,7 +249,7 @@ const CseNotesLayout = ({ children }: { children: React.ReactNode }) => {
           </nav>
 
           {/* Mobile Content Section */}
-          <main className="sm:hidden p-1 py-1 pt-3 h-[calc(100vh-10rem)] overflow-auto">
+          <main className="sm:hidden p-1 py-1 pt-3 h-[calc(100vh-14rem)] overflow-auto">
             {children}
           </main>
 
