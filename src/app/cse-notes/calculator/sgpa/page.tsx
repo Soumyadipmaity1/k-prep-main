@@ -81,7 +81,7 @@ const FifthSemSGPACalculator = () => {
 
   return (
     <div className="w-full h-full bg-[#f8e9f4] overflow-y-auto border rounded-xl border-gray-300 ">
-      <div className="max-w-7xl max-h-screen mx-auto p-4 px-3 py-5 sm:p-10">
+      <div className="max-w-7xl max-h-screen mx-auto p-4 px-3 pb-6 sm:p-10">
 
         <div className="subject-card p-6 rounded-2xl mb-6">
           <div className="flex items-center justify-center gap-3">
@@ -121,7 +121,7 @@ const FifthSemSGPACalculator = () => {
           ))}
         </div>
 
-        <div className="flex justify-center mb-6">
+        <div className="flex justify-center pb-6">
           <button 
             onClick={calculateSGPA} 
             className="subject-card px-8 py-3 rounded-xl font-medium
@@ -134,7 +134,7 @@ const FifthSemSGPACalculator = () => {
         </div>
 
         {sgpa !== null && (
-          <div className="bg-recommended rounded-xl p-6 max-w-2xl mx-auto">
+          <div className="bg-recommended rounded-xl p-6 mb-5 max-w-2xl mx-auto">
             <div className="text-center mb-4">
               <span className="text-[#843AB1]/80 text-sm">Your SGPA</span>
               <h3 className="text-5xl font-bold text-[#843AB1] mt-1">
