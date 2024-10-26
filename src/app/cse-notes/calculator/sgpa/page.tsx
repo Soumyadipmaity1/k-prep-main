@@ -15,8 +15,8 @@ const subjects: Subject[] = [
   { name: 'DAA', credits: 3, grade: null },
   { name: 'DAA LAB', credits: 1, grade: null },
   { name: 'EE', credits: 3, grade: null },
-  { name: 'HPC', credits: 3, grade: null },
-  { name: 'DMDW', credits: 3, grade: null },
+  { name: 'HPC/DOS', credits: 3, grade: null },
+  { name: 'DMDW/CI/Compiler', credits: 3, grade: null },
 ];
 
 const gradeToPoint = {
