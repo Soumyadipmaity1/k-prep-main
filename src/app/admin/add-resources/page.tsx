@@ -6,9 +6,10 @@ import { useRouter } from "next/navigation";
 import axios from "axios";
 import toast from "react-hot-toast";
 import ScaleLoader from "react-spinners/ScaleLoader";
+import { useQuery } from "@tanstack/react-query";
 
 const AddUser = () => {
-  console.log("----------------------->")
+  console.log("----------------------->");
   const router = useRouter();
   const { data: session } = useSession();
 
@@ -29,23 +30,26 @@ const AddUser = () => {
   const [loading, setLoading] = useState(false); // Loading state
 
   // Fetch subject titles
-  useEffect(() => {
-    const getSubjectTitles = async () => {
-      try {
-        const { data } = await axios.get("/api/note/get-subject");
-        setSubjectTitles(data.resource);
-        console.log(data)
-      } catch (error) {
-        console.error("Error fetching subject titles:", error);
-      }
-    };
+  // useEffect(() => {
+  //   const getSubjectTitles = async () => {
+  //     try {
+  //       const { data } = await axios.get("/api/note/get-subject");
+  //       setSubjectTitles(data.resource);
+  //       console.log(data)
+  //     } catch (error) {
+  //       console.error("Error fetching subject titles:", error);
+  //     }
+  //   };
 
-    getSubjectTitles();
-  }, []);
-
-  console.log(subjectTitles)
-  
-
+  //   getSubjectTitles();
+  // }, []);
+  const { isLoading, isError, data } = useQuery({
+    queryKey: ["subject"],
+    queryFn: () =>
+      axios.get("/api/note/get-subject").then((res) => res.data.resource),
+  });
+  console.log("DATA IS",data)
+  // console.log(subjectTitles);
 
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
@@ -109,7 +113,7 @@ const AddUser = () => {
             disabled={loading} // Disable select when loading
           >
             <option value="">Select Subject Title</option>
-            {subjectTitles.map((item) => (
+            {data.map((item:any) => (
               <option key={item._id} value={item._id}>
                 {item.subjectFullname}
               </option>
@@ -194,8 +198,3 @@ const AddUser = () => {
 };
 
 export default AddUser;
-
-
-
-
-
