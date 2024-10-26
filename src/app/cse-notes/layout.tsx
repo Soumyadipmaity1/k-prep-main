@@ -9,11 +9,13 @@ import dynamic from "next/dynamic";
 import { denkOne } from "../font";
 import { HomeIcon } from "@heroicons/react/24/solid";
 import Navbar from "@/components/Menubar/Navbar/Navbar";
+import { TbCalculator } from 'react-icons/tb';
 const FirstYearModal = dynamic(() => import("@/components/Modal/1styearmodal"));
 const SecondYearModal = dynamic(
   () => import("@/components/Modal/2ndyearModal")
 );
 const ThirdYearModal = dynamic(() => import("@/components/Modal/3rdyearModal"));
+const CalculatorModal = dynamic(() => import("@/components/Modal/calculatorModal"));
 
 const CseNotesLayout = ({ children }: { children: React.ReactNode }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -44,15 +46,14 @@ const CseNotesLayout = ({ children }: { children: React.ReactNode }) => {
 
   return (
     <div className={denkOne.className}>
-      <Navbar/>
+      <Navbar />
 
       <div className={denkOne.className}>
         {/* Desktop Sidebar */}
-        <div className="sm:flex hidden justify-between h-[78vh] mt-6 rounded-xl">
+        <div className="sm:flex hidden justify-between h-[79vh] mt-6 rounded-xl">
           <aside
-            className={`bg-sidebar text-white rounded-xl transition-all duration-300 ${
-              isOpen ? "w-56" : "w-20"
-            } flex flex-col justify-between`}
+            className={`bg-sidebar text-white rounded-xl transition-all duration-300 ${isOpen ? "w-56" : "w-20"
+              } flex flex-col justify-between`}
           >
             <div>
               <div className="flex pl-6 cursor-pointer text-center items-center justify-between mt-10">
@@ -121,14 +122,21 @@ const CseNotesLayout = ({ children }: { children: React.ReactNode }) => {
                 </div>
                 <div
                   className={`flex pl-6 cursor-pointer my-8 py-1 items-center space-x-2 ${getNavItemClass(
-                    "/cse-notes/additional-notes"
+                    "/cse-notes/calculator"
                   )}`}
-                  onClick={() => router.push("/cse-notes/additional-notes")}
+                  onClick={() =>
+                    openModal(
+                      <CalculatorModal
+                        isOpen={true}
+                        onClose={closeModal}
+                        title="Calculator"
+                        yearPath="/cse-notes/calculator"
+                      />
+                    )
+                  }
                 >
-                  <FiEdit size={32} />
-                  {isOpen && (
-                    <span className="text-xl">Additional Notes</span>
-                  )}
+                  <TbCalculator size={32} />
+                  {isOpen && <span className="text-xl">Calculator</span>}
                 </div>
               </nav>
             </div>
@@ -212,6 +220,24 @@ const CseNotesLayout = ({ children }: { children: React.ReactNode }) => {
             >
               <MdLooks3 size={28} />
               <span className="text-xs">3rd Year</span>
+            </div>
+            <div
+              className={`flex flex-col items-center cursor-pointer ${getNavItemClass(
+                "/cse-notes/calculator"
+              )}`}
+              onClick={() =>
+                openModal(
+                  <CalculatorModal
+                    isOpen={true}
+                    onClose={closeModal}
+                    title="Calculator"
+                    yearPath="/cse-notes/calculator"
+                  />
+                )
+              }
+            >
+              <TbCalculator size={28} />
+              <span className="text-xs">Calculator</span>
             </div>
 
             <div className="flex flex-col items-center cursor-pointer">
