@@ -22,7 +22,7 @@ interface Note {
   subjectFullname: string;
 }
 
-const AddUser: React.FC = () => {
+const AddPYq: React.FC = () => {
   const [formData, setFormData] = useState<FormData>({
     description: "",
     resourceTitle: "",
@@ -218,4 +218,4 @@ const AddUser: React.FC = () => {
   );
 };
 
-export default AddUser;
+export default AddPYq;
