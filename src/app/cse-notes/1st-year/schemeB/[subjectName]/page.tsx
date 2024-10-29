@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import Subject1Notes from "@/components/Resource1stYear/ResourceSchemeA/Subject1Notes";
 import { useSearchParams } from "next/navigation";
+import { IPYQ } from "@/models/pyq.model";
 
 export type NoteType = {
   resourceTitle: string;
@@ -12,7 +13,7 @@ export type NoteType = {
 };
 
 const Subject1 = () => {
-  const [notes, setNotes] = useState<NoteType[]>([]);
+  const [notes, setNotes] = useState<IPYQ[]>([]);
   const searchParams = useSearchParams();
   const ID = searchParams.get("id");
 
