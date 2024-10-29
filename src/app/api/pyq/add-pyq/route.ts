@@ -11,7 +11,7 @@ export async function POST(request: NextRequest) {
   try {
     const { subjectFullNameId, title, description, url, session, year } =
       (await request.json()) as IPYQ; // Use the interface for type safety
-    console.log(subjectFullNameId, title, description, url);
+    
     // Validate input fields
     if (
       !subjectFullNameId ||

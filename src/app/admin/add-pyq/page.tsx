@@ -15,6 +15,8 @@ interface FormData {
   subjectTitle: string;
   year: string;
   session: string;
+  semesterType: string;
+  semesterPeriod: string; // "mid" or "end"
 }
 
 interface Note {
@@ -22,7 +24,7 @@ interface Note {
   subjectFullname: string;
 }
 
-const AddPYq: React.FC = () => {
+const AddPYQ: React.FC = () => {
   const [formData, setFormData] = useState<FormData>({
     description: "",
     resourceTitle: "",
@@ -30,6 +32,8 @@ const AddPYq: React.FC = () => {
     subjectTitle: "",
     year: "",
     session: "",
+    semesterType: "",
+    semesterPeriod: "",
   });
   const [loading, setLoading] = useState<boolean>(false);
 
@@ -52,13 +56,15 @@ const AddPYq: React.FC = () => {
     try {
       const postData = {
         description: formData.description,
-        title: formData.resourceTitle,
+        resourceTitle: formData.resourceTitle,
         url: formData.url,
         subjectFullNameId: formData.subjectTitle,
         year: formData.year,
         session: formData.session,
+        semesterType: formData.semesterType,
+        semesterPeriod: formData.semesterPeriod,
       };
-      const res = await axios.post("/api/pyq/add-pyq", postData);
+      const res = await axios.post("/api/note/add-note", postData);
       toast.success(res.data.message);
 
       setFormData({
@@ -68,6 +74,8 @@ const AddPYq: React.FC = () => {
         subjectTitle: "",
         year: "",
         session: "",
+        semesterType: "",
+        semesterPeriod: "",
       });
     } catch (error: any) {
       console.error("Error adding note:", error);
@@ -151,6 +159,26 @@ const AddPYq: React.FC = () => {
           </select>
         </div>
 
+        {/* Semester Type Dropdown */}
+        <div className="mb-4">
+          <label htmlFor="semesterType" className="block text-lg font-semibold text-fuchsia-800">
+            Semester Type
+          </label>
+          <select
+            id="semesterType"
+            name="semesterType"
+            value={formData.semesterType}
+            onChange={handleInputChange}
+            className="mt-1 block w-full border-gray-600 border rounded-md py-2 px-3"
+            required
+            disabled={loading}
+          >
+            <option value="">Select Semester Type</option>
+            <option value="mid">Mid Semester</option>
+            <option value="end">End Semester</option>
+          </select>
+        </div>
+
         {/* Resource Title */}
         <div className="mb-4">
           <label htmlFor="resourceTitle" className="block text-lg font-semibold text-fuchsia-800">
@@ -218,4 +246,4 @@ const AddPYq: React.FC = () => {
   );
 };
 
-export default AddPYq;
+export default AddPYQ;
