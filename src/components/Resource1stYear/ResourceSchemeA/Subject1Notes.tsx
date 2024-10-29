@@ -1,8 +1,9 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import { NoteType } from "@/app/cse-notes/2nd-year/3rdSem/[subjectName]/page";
+import { IPYQ } from "@/models/pyq.model";
 
-const Subject1Notes = ({ notes }: { notes: NoteType[] }) => {
+const Subject1Notes = ({ notes }: { notes: IPYQ[] }) => {
   const [loading, setLoading] = useState(true);
 
   // Simulate loading effect for demonstration (you can adjust based on actual data loading)
@@ -41,7 +42,7 @@ const Subject1Notes = ({ notes }: { notes: NoteType[] }) => {
         >
           <div className="flex items-center justify-between mb-3 sm:mb-5">
             <h2 className="text-xl font-bold text-purple-700">
-              {resource.resourceTitle}
+              {resource.title}
             </h2>
           </div>
           <p className="mt-2 font-thin text-gray-600">{resource.description}</p>
@@ -53,7 +54,7 @@ const Subject1Notes = ({ notes }: { notes: NoteType[] }) => {
               rel="noopener noreferrer"
               className="inline-block px-4 py-2 bg-purple-600 text-white font-semibold rounded-lg shadow-md hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-purple-400 focus:ring-opacity-75"
             >
-              View Note
+              View PYQ
             </a>
           </div>
         </div>

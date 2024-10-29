@@ -29,6 +29,6 @@ const NotesSchema = new Schema<IPYQ>(
   }
 );
 
-const PYQ = models.Note || model<IPYQ>("Pyqs", NotesSchema);
+const PYQ = models.Pyqs || model<IPYQ>("Pyqs", NotesSchema);
 
 export default PYQ;

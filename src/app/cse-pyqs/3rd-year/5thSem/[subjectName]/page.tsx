@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import Subject1Notes from "@/components/Resource1stYear/ResourceSchemeA/Subject1Notes";
 import { useSearchParams } from "next/navigation";
+import { IPYQ } from "@/models/pyq.model";
 
 export type PyqType = {
   resourceTitle: string;
@@ -12,7 +13,7 @@ export type PyqType = {
 };
 
 const Subject = () => {
-  const [pyqs, setPyqs] = useState<PyqType[]>([]);
+  const [pyqs, setPyqs] = useState<IPYQ[]>([]);
   const searchParams = useSearchParams();
   const ID = searchParams.get("id");
 
@@ -20,7 +21,7 @@ const Subject = () => {
     const fetchPyqs = async () => {
       if (ID) {
         try {
-          const { data } = await axios.get(`/api/pyq/view-resources?id=${ID}`);
+          const { data } = await axios.get(`/api/pyq/view-pyqs?id=${ID}`);
           setPyqs(data.pyqs);
         } catch (error) {
           console.error("Error fetching PYQs:", error);
