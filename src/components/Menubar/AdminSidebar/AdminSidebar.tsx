@@ -69,7 +69,7 @@ const AdminSidebar = () => {
           </ul>
         </nav>
 
-        <div className="absolute top-[60vh] w-full p-4">
+        <div className="absolute top-[76vh] w-full p-4">
           <button
             onClick={handleLogout}
             className="w-full px-4 py-2 text-white bg-red-600 rounded-md hover:bg-red-700"
