@@ -52,13 +52,13 @@ const AddPYq: React.FC = () => {
     try {
       const postData = {
         description: formData.description,
-        resourceTitle: formData.resourceTitle,
+        title: formData.resourceTitle,
         url: formData.url,
         subjectFullNameId: formData.subjectTitle,
         year: formData.year,
         session: formData.session,
       };
-      const res = await axios.post("/api/note/add-note", postData);
+      const res = await axios.post("/api/pyq/add-pyq", postData);
       toast.success(res.data.message);
 
       setFormData({
