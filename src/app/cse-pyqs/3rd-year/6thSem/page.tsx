@@ -1,9 +1,19 @@
-import React from 'react'
+import SubjectButton from "@/components/Subjects/2nd-year/3rdSenSubject";
 
-function page() {
+const ThirdSem = () => {
   return (
-    <div>page</div>
-  )
-}
+    <div className="w-full h-full bg-[#f8e9f4] overflow-y-auto border rounded-xl border-gray-300">
+      <div className="max-h-screen font-bold p-5 sm:p-10">
+        <h1 className="text-center text-4xl">
+          <span className="modal-text">Pick a subject for PYQs!</span>
+        </h1>
+        <div className="mt-10">
+          <SubjectButton year={3} sem={6} />
+        </div>
+      </div>
+    </div>
+  );
+};
 
-export default page
+export default ThirdSem;
+
