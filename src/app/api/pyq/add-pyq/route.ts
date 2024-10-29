@@ -9,9 +9,22 @@ connect();
 
 export async function POST(request: NextRequest) {
   try {
-    const { subjectFullNameId, title, description, url, session, year } =
-      (await request.json()) as IPYQ; // Use the interface for type safety
-    
+    const {
+      subjectFullNameId,
+      title,
+      description,
+      url,
+      session,
+      year,
+      semesterType,
+    } = (await request.json()) as IPYQ; // Use the interface for type safety
+console.log(  subjectFullNameId,
+  title,
+  description,
+  url,
+  session,
+  year,
+  semesterType,)
     // Validate input fields
     if (
       !subjectFullNameId ||
@@ -19,7 +32,8 @@ export async function POST(request: NextRequest) {
       !description ||
       !url ||
       !session ||
-      !year
+      !year ||
+      !semesterType
     ) {
       return NextResponse.json(
         {
@@ -38,7 +52,8 @@ export async function POST(request: NextRequest) {
       description,
       url,
       session,
-      year
+      year,
+      semesterType
     });
 
     // Find the subject to update
@@ -62,7 +77,7 @@ export async function POST(request: NextRequest) {
     return NextResponse.json(
       {
         success: true,
-        message: "Note saved successfully",
+        message: "PYQ saved successfully",
       },
       {
         status: 201, // Created

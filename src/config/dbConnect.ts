@@ -22,8 +22,11 @@ export async function connect(): Promise<void> {
 
     connection.on("error", (err) => {
       console.log("connection error: " + err);
+    process.exit(1);
+
     });
   } catch (error: any) {
     console.log("Something went wrong in your connection: " + error);
+    process.exit(1);
   }
 }
