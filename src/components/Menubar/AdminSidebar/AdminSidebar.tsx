@@ -38,7 +38,7 @@ const AdminSidebar = () => {
           { name: "Dashboard", path: "/admin" },
           { name: "Add Subject", path: "/admin/add-subject" },
           { name: "Add Resources", path: "/admin/add-resources" },
-          { name: "Add Lab", path: "/admin/add-lab" },
+          { name: "Add PYQ", path: "/admin/add-pyq" },
           { name: "Add User", path: "/admin/add-user" },
           { name: "View Notes", path: "/admin/view-note" },
           { name: "Profile", path: "/admin/view-profile" },

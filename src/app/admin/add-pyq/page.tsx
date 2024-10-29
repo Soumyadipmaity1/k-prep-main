@@ -1,48 +1,39 @@
 "use client";
 
 import { useSession } from "next-auth/react";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import axios from "axios";
 import toast from "react-hot-toast";
 import ScaleLoader from "react-spinners/ScaleLoader";
 import { useQuery } from "@tanstack/react-query";
 
-const AddUser = () => {
+interface FormData {
+  description: string;
+  resourceTitle: string;
+  url: string;
+  subjectTitle: string;
+  year: string;
+  session: string;
+}
 
+interface Note {
+  _id: string;
+  subjectFullname: string;
+}
 
-  // Redirect if user is not an admin
-  // useEffect(() => {
-  //   if (session?.user.role !== "admin") {
-  //     router.push("/admin");
-  //   }
-  // }, [session, router]);
-
-  const [subjectTitles, setSubjectTitles] = useState<any[]>([]);
-  const [formData, setFormData] = useState({
+const AddUser: React.FC = () => {
+  const [formData, setFormData] = useState<FormData>({
     description: "",
     resourceTitle: "",
     url: "",
     subjectTitle: "",
+    year: "",
+    session: "",
   });
-  const [loading, setLoading] = useState(false); // Loading state
+  const [loading, setLoading] = useState<boolean>(false);
 
-  // Fetch subject titles
-  // useEffect(() => {
-  //   const getSubjectTitles = async () => {
-  //     try {
-  //       const { data } = await axios.get("/api/note/get-subject");
-  //       setSubjectTitles(data.resource);
-  //       console.log(data)
-  //     } catch (error) {
-  //       console.error("Error fetching subject titles:", error);
-  //     }
-  //   };
-
-  //   getSubjectTitles();
-  // }, []);
-  // Fetching notes
-  const { isLoading, isError, data } = useQuery({
+  const { isLoading, isError, data } = useQuery<{ notes: Note[] }>({
     queryKey: ["notes"],
     queryFn: () => axios.get("/api/note/view-note").then((res) => res.data),
   });
@@ -56,25 +47,27 @@ const AddUser = () => {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setLoading(true); // Set loading state to true
+    setLoading(true);
 
     try {
-      // console.log(formData.subjectTitle)
-      const data = {
+      const postData = {
         description: formData.description,
         resourceTitle: formData.resourceTitle,
         url: formData.url,
         subjectFullNameId: formData.subjectTitle,
+        year: formData.year,
+        session: formData.session,
       };
-      const res = await axios.post("/api/note/add-note", data);
-      toast.success(res.data.message); // Show success toast
+      const res = await axios.post("/api/note/add-note", postData);
+      toast.success(res.data.message);
 
-      // Reset form data
       setFormData({
         description: "",
         resourceTitle: "",
         url: "",
         subjectTitle: "",
+        year: "",
+        session: "",
       });
     } catch (error: any) {
       console.error("Error adding note:", error);
@@ -83,7 +76,7 @@ const AddUser = () => {
           "An unexpected error occurred. Please try again."
       );
     } finally {
-      setLoading(false); // Reset loading state
+      setLoading(false);
     }
   };
 
@@ -91,13 +84,11 @@ const AddUser = () => {
     <div className="p-6 mx-auto max-w-3xl bg-[#fae8ff] rounded-md shadow-md">
       <h2 className="text-2xl font-bold text-center my-4 mb-8">Add Note</h2>
       <form onSubmit={handleSubmit}>
+        
         {/* Subject Title Dropdown */}
         <div className="mb-4">
-          <label
-            htmlFor="subjectTitle"
-            className="block text-lg font-semibold text-fuchsia-800"
-          >
-            Lab Subject Name ({data?.notes.length})
+          <label htmlFor="subjectTitle" className="block text-lg font-semibold text-fuchsia-800">
+            PYQ Subject Name ({data?.notes.length ?? 0})
           </label>
           <select
             id="subjectTitle"
@@ -106,10 +97,10 @@ const AddUser = () => {
             onChange={handleInputChange}
             className="mt-1 block w-full border-gray-600 border rounded-md py-2 px-3"
             required
-            disabled={loading} // Disable select when loading
+            disabled={loading}
           >
-            <option value="">Select Subject Title </option>
-            {data?.notes.map((item:any) => (
+            <option value="">Select Subject Title</option>
+            {data?.notes.map((item: Note) => (
               <option key={item._id} value={item._id}>
                 {item.subjectFullname}
               </option>
@@ -117,12 +108,52 @@ const AddUser = () => {
           </select>
         </div>
 
+        {/* Year Dropdown */}
+        <div className="mb-4">
+          <label htmlFor="year" className="block text-lg font-semibold text-fuchsia-800">
+            Year
+          </label>
+          <select
+            id="year"
+            name="year"
+            value={formData.year}
+            onChange={handleInputChange}
+            className="mt-1 block w-full border-gray-600 border rounded-md py-2 px-3"
+            required
+            disabled={loading}
+          >
+            <option value="">Select Year</option>
+            {[...Array(12).keys()].map(i => (
+              <option key={2013 + i} value={2013 + i}>
+                {2013 + i}
+              </option>
+            ))}
+          </select>
+        </div>
+
+        {/* Session Dropdown */}
+        <div className="mb-4">
+          <label htmlFor="session" className="block text-lg font-semibold text-fuchsia-800">
+            Session
+          </label>
+          <select
+            id="session"
+            name="session"
+            value={formData.session}
+            onChange={handleInputChange}
+            className="mt-1 block w-full border-gray-600 border rounded-md py-2 px-3"
+            required
+            disabled={loading}
+          >
+            <option value="">Select Session</option>
+            <option value="autumn">Autumn</option>
+            <option value="spring">Spring</option>
+          </select>
+        </div>
+
         {/* Resource Title */}
         <div className="mb-4">
-          <label
-            htmlFor="resourceTitle"
-            className="block text-lg font-semibold text-fuchsia-800"
-          >
+          <label htmlFor="resourceTitle" className="block text-lg font-semibold text-fuchsia-800">
             Resource Title
           </label>
           <input
@@ -133,16 +164,13 @@ const AddUser = () => {
             onChange={handleInputChange}
             className="mt-1 block w-full border-gray-600 border rounded-md py-2 px-3"
             required
-            disabled={loading} // Disable input when loading
+            disabled={loading}
           />
         </div>
 
         {/* Resource Description */}
         <div className="mb-4">
-          <label
-            htmlFor="description"
-            className="block text-lg font-semibold text-fuchsia-800"
-          >
+          <label htmlFor="description" className="block text-lg font-semibold text-fuchsia-800">
             Resource Description
           </label>
           <input
@@ -153,16 +181,13 @@ const AddUser = () => {
             onChange={handleInputChange}
             className="mt-1 block w-full border-gray-600 border rounded-md py-2 px-3"
             required
-            disabled={loading} // Disable input when loading
+            disabled={loading}
           />
         </div>
 
         {/* Add URL */}
         <div className="mb-4">
-          <label
-            htmlFor="url"
-            className="block text-lg font-semibold text-fuchsia-800"
-          >
+          <label htmlFor="url" className="block text-lg font-semibold text-fuchsia-800">
             Add URL
           </label>
           <input
@@ -173,14 +198,14 @@ const AddUser = () => {
             onChange={handleInputChange}
             className="mt-1 block w-full border-gray-600 border rounded-md py-2 px-3"
             required
-            disabled={loading} // Disable input when loading
+            disabled={loading}
           />
         </div>
 
         <button
           type="submit"
           className="px-4 py-2 text-white bg-fuchsia-600 rounded-md hover:bg-fuchsia-800"
-          disabled={loading} // Disable button when loading
+          disabled={loading}
         >
           {loading ? (
             <ScaleLoader color="#ffffff" height={10} width={2} />
