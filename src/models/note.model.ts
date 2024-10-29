@@ -34,7 +34,8 @@ interface IResourceModel {
   year: string;
   semister: string; // Corrected 'semister' to 'semester'
   scheme?: string;
-  notes?: Array<ObjectId>; // Specified type for notes as an array of ObjectId
+  notes?: Array<ObjectId>;
+  pyqs?: Array<ObjectId>; // Specified type for notes as an array of ObjectId
 }
 
 // Resource Schema
@@ -65,6 +66,7 @@ const ResourceSchema = new Schema<IResourceModel>(
       required: false,
     },
     notes: [{ type: mongoose.Schema.ObjectId, ref: "Notes" }], // Correct ref here
+    pyqs: [{ type: mongoose.Schema.ObjectId, ref: "PYQS" }], // Correct ref here
   },
   {
     timestamps: true,
