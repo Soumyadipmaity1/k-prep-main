@@ -43,13 +43,11 @@ const AddUser = () => {
 
   //   getSubjectTitles();
   // }, []);
+  // Fetching notes
   const { isLoading, isError, data } = useQuery({
-    queryKey: ["subject"],
-    queryFn: () =>
-      axios.get("/api/note/get-subject").then((res) => res.data.resource),
+    queryKey: ["notes"],
+    queryFn: () => axios.get("/api/note/view-note").then((res) => res.data),
   });
-  console.log("DATA IS",data)
-  // console.log(subjectTitles);
 
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
@@ -101,7 +99,7 @@ const AddUser = () => {
             htmlFor="subjectTitle"
             className="block text-lg font-semibold text-fuchsia-800"
           >
-            Subject Title
+            Subject Title ({data?.notes.length})
           </label>
           <select
             id="subjectTitle"
@@ -112,8 +110,8 @@ const AddUser = () => {
             required
             disabled={loading} // Disable select when loading
           >
-            <option value="">Select Subject Title</option>
-            {data.map((item:any) => (
+            <option value="">Select Subject Title </option>
+            {data?.notes.map((item:any) => (
               <option key={item._id} value={item._id}>
                 {item.subjectFullname}
               </option>
